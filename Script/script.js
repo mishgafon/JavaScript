@@ -1,14 +1,31 @@
-let money = 10;
+let money = 100000;
 console.log('money: ', money);
-const income = 200; 
+console.log(typeof money);
+const income = '2000р.'; 
 console.log('income: ', income);
-let addExpenses = 30;
+console.log(typeof  income);
+console.log(income.length);
+let addExpenses = ('1000Р., 2000р., 4000Р.');
 console.log('addExpenses: ', addExpenses);
-const deposit = 400;
+console.log(typeof  addExpenses);
+console.log(addExpenses.toLowerCase());
+console.log(addExpenses.split(', '));
+const deposit = true;
 console.log('deposit: ', deposit);
-let mission = 50;
+console.log(typeof  deposit);
+let mission = 500000;
 console.log('mission: ', mission);
-let period = 2;
+console.log(typeof  mission);
+console.log('“Цель заработать ' + (mission) + ' рублей”');
+let period = 5;
 console.log('period: ', period);
+console.log(typeof  period);
+console.log('“Период ' + (period) + ' месяцев”');  
+let budgetDay = 0;
+budgetDay = money / 30;
+console.log('budgetDay: ', budgetDay);
+budgetDay = money % 30;
+console.log('budgetDay: ', budgetDay);
+
 alert("ввод данных окончен!");
 
