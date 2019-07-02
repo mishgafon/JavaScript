@@ -7,7 +7,7 @@ let money = 100000;
     budgetDay = money / 30; 
 console.log(typeof money, typeof  income, typeof  deposit, income.length);
 console.log(addExpenses.toLowerCase().split(', '));
-console.log('Период ' + period + ' месяцев.' + ' Цель заработать ' + mission + ' рублей');
+console.log('Период ' + period + ' месяцев.' + ' Цель: заработать ' + mission + ' рублей');
 console.log('Бюджет на день: ' + budgetDay + '. Остаток: ' + money % 30);  
 
 alert("ввод данных окончен!");
