@@ -1,15 +1,16 @@
-let money = +prompt('Ваш месячный доход?');
-    income = 'Фриланс';
-    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'.split(','));
+'use strict'
+let money = +prompt('Ваш месячный доход?'),
+    income = 'Фриланс',
+    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'.split(',')),
     //addExpenses = 'Машина, Коммуналка, Продукты';
-    deposit = !!confirm('Есть ли у вас депозит в банке?');
-    expenses = prompt('Какие обязательные ежемесячные расходы у вас есть?')
-    budget = +prompt('Во сколько это обойдется?')
-    expensesRepeat = prompt('Какие обязательные ежемесячные расходы у вас есть?')
-    budgetRepeat = +prompt('Во сколько это обойдется?')  
-    mission = 50000;
-    budgetMonth = money - (budget + budgetRepeat)
-    budgetDay = budgetMonth / 30; 
+    deposit = !!confirm('Есть ли у вас депозит в банке?'),
+    expenses = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
+    budget = +prompt('Во сколько это обойдется?'),
+    expensesRepeat = prompt('Какие обязательные ежемесячные расходы у вас есть?'),
+    budgetRepeat = +prompt('Во сколько это обойдется?'), 
+    mission = 50000,
+    budgetMonth = money - (budget + budgetRepeat),
+    budgetDay = budgetMonth / 30, 
     period = mission / budgetMonth;
     console.log('Доход за месяц: ', budgetMonth);
 console.log(typeof money, typeof  income, typeof  deposit);
