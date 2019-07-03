@@ -1,14 +1,22 @@
-let money = 100000;
+let money = +prompt('Ваш месячный доход?');
     income = 'Фриланс';
-    addExpenses = 'Машина, Коммуналка, Продукты';
-    deposit = true;
-    mission = 500000;
-    period = 5;
-    budgetDay = money / 30; 
-console.log(typeof money, typeof  income, typeof  deposit, income.length);
-console.log(addExpenses.toLowerCase().split(', '));
-console.log('Период ' + period + ' месяцев.' + ' Цель: заработать ' + mission + ' рублей');
-console.log('Бюджет на день: ' + budgetDay + '. Остаток: ' + money % 30);  
-
+    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'.split(','));
+    //addExpenses = 'Машина, Коммуналка, Продукты';
+    deposit = !!confirm('Есть ли у вас депозит в банке?');
+    expenses = prompt('Какие обязательные ежемесячные расходы у вас есть?')
+    budget = +prompt('Во сколько это обойдется?')
+    expensesRepeat = prompt('Какие обязательные ежемесячные расходы у вас есть?')
+    budgetRepeat = +prompt('Во сколько это обойдется?')  
+    mission = 50000;
+    budgetMonth = money - (budget + budgetRepeat)
+    budgetDay = budgetMonth / 30; 
+    period = mission / budgetMonth;
+    console.log('Доход за месяц: ', budgetMonth);
+console.log(typeof money, typeof  income, typeof  deposit);
+console.log(addExpenses.toLowerCase().split(','));
+console.log('Цель: заработать ' + mission + ' рублей.' + ' Цель будет достигнута через ' + Math.ceil(period) + ' месяцев.' );
+console.log('Бюджет на день: ' + Math.floor(budgetDay));  
+//console.log('Цель: заработать ' + mission + ' рублей.' + ' Цель будет достигнута через ' + Math.ceil(period) + ' месяцев.' );
+//console.log('Период ' + period + ' месяцев.' + ' Цель: заработать ' + mission + ' рублей');
 alert("ввод данных окончен!");
 
