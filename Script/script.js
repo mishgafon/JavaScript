@@ -44,12 +44,18 @@ let appData = {
             while (isNaN(cashIncome) || cashIncome === '' || cashIncome === null);
             
             appData.income[itemIncome] = cashIncome;
-        } 
+        }
 
         let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую?', 
         'Кредит,машина,квартира'); 
-            appData.addExpenses = addExpenses.toLowerCase().split(',');
+            appData.addExpenses = addExpenses.split(',');
             appData.deposit = confirm('Есть ли у вас депозит в банке?');
+
+            for (let word of appData.addExpenses) {
+                word = word[0].toUpperCase() + word.substr(1);
+                console.log(word);
+            }
+
 
             for (let i = 0; i < 2; i++) {
 
@@ -117,12 +123,12 @@ let appData = {
     },
 
     calcSavedMoney: function(){
+
         return appData.budgetMonth * appData.period;
     },
 
-   
 
-                 
+              
     
 
 } 
@@ -135,10 +141,12 @@ appData.getBudget();
 console.log("Бюджет на день: " + appData.budgetDay);
 console.log("Расходы составят: " + appData.expensesMonth);
 
+
 console.log((appData.getTargetMonth() >= 0) ?
     'Срок достижения цели: ' + appData.getTargetMonth() + ' мес.' : 'Цель не будет достигнута'); 
 
 console.log(appData.getStatusIncome());
+
 
 for (let key in appData){
     console.log('Наша программа включает в себя данные: ' + key + ', Значение:'  + appData[key]);
@@ -147,3 +155,4 @@ for (let key in appData){
 for (let key in appData.addExpenses){
     console.log(appData.addExpenses[key][0].toUpperCase() + appData.addExpenses[key].substr(1));
  } 
+
