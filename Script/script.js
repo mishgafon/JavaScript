@@ -1,39 +1,26 @@
 'use strict';
-let body = document.querySelector('body'),
-	books = document.querySelectorAll('.books'),
-	book = document.querySelectorAll('.book'),
-	adv = document.querySelectorAll('.adv'),
-	ul = document.querySelectorAll('ul'), 
-	li = document.querySelectorAll('li'),
-	a = document.querySelectorAll('a'),
-	chapter8 = document.createElement('li');
-
-    console.log(body, books, book, a, ul, li);   
-    
- 
- 
-books[0].insertBefore(book[1], book[0]); // переставляем блоки с книгами
-books[0].insertBefore(book[2], null);
-books[0].insertBefore(book[4], book[3]);
-adv[0].remove(); // удаление рекламы 
-body.setAttribute('style', 'background-image: url(../image/you-dont-know-js.jpg)');
-a[4].textContent = 'Книга 3. this и Прототипы Объектов';
-ul[0].insertBefore(li[8], li[4]); 
-ul[0].insertBefore(li[6], li[8]);
-ul[0].insertBefore(li[2], li[10]); 
-ul[5].insertBefore(li[48], li[52]);
-ul[5].insertBefore(li[55], li[49]);  
-ul[5].insertBefore(li[51], li[54]);
-chapter8.textContent = 'Глава 8: За пределами ES6';
-ul[2].appendChild(chapter8);
-ul[2].insertBefore(li[26], null);
-
-
-
-
-
-
-
-
-
-
+	let buttonId = document.getElementById('start'),
+		buttonPlus = document.getElementsByTagName('button'),
+		buttonPlusExpenses = buttonPlus[1],
+		buttonPlusIncome = buttonPlus[0],
+		checkbox = document.querySelector('#deposit-check'),
+		additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
+		resultTotalDudgetMonth = document.getElementsByClassName('.result-total budget_month-value'),
+		resultTotalBudgetDay = document.getElementsByClassName('.result-total budget_day-value'),
+		resultTotalExpensesMonth = document.getElementsByClassName('.result-total expenses_month-value'),
+		resultTotalAdditionalIncome = document.getElementsByClassName('.result-total additional_income-value'),
+		resultTotalAdditionalExpenses = document.getElementsByClassName('.result-total additional_expenses-value'),
+		resultTotalIncomePeriod = document.getElementsByClassName('.result-total income_period-value'),
+		resultTotalTargetMonth = document.getElementsByClassName('.result-total target_month-value'),
+		salaryAmount = document.querySelector('salary-amount'),
+		incomeTitle = document.querySelector('income-title'),
+		cincomeAmount = document.querySelector('income-amount'),
+		additionalExpensesItem = document.querySelector('additional_expenses-item'),
+		expensesAmount = document.querySelector('.expenses-amount'),
+		expensesTitle = document.querySelector('.expenses-title'),
+		periodSelect = document.querySelector('.period-select');
+		
+		
+		
+		
+	
