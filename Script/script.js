@@ -48,7 +48,7 @@
 				appData.getAddExpenses();
 				appData.getAddIncome();
 				appData.getBudget();
-				//appData.getRangeAmount();
+				
 
 				appData.showResult();
 			},
@@ -60,7 +60,10 @@
 				additionalExpensesValue.value = appData.addExpenses.join(',');
 				additionalIncomeValue.value = appData.addIncome.join(', ');
 				targetMonthValue.value = Math.ceil(appData.getTargetMonth()); // срок достижения цели
-				incomePeriodValue.value = appData.calcPeriod();
+				incomePeriodValue.value = appData.calcPeriod(); 
+				periodSelect.addEventListener('change', function(){
+					incomePeriodValue.value = appData.calcPeriod();
+				})
 			},
 
 			addExpensesBlock: function(){
@@ -161,22 +164,25 @@
 				} 
 			},
 
-			calcPeriod: function(){ //Накопления за период
-				return appData.budgetMonth * periodSelect.value;
-			},
 
+			
 			getRangeAmount: function(){
 				return periodAmount.textContent = periodSelect.value;
 				
+			},
 
-			}
-		
+			calcPeriod: function(){ //Накопления за период
+				return appData.budgetMonth * periodSelect.value;
+
+
+			}		
 
 
 		}; 
 		
 		start.addEventListener('click', appData.start);
 		periodSelect.addEventListener('change', appData.getRangeAmount);
+		//periodAmount.addEventListener('input', appData.calcPeriod);
 
 		expensesPlus.addEventListener('click', appData.addExpensesBlock);
 		incomePlus.addEventListener('click', appData.addIncomeBlock);
