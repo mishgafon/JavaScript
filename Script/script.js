@@ -166,7 +166,9 @@
 			},
 
 			getRangeAmount: function(){
-				return periodAmount.textContent = periodSelect.textContent;
+				return periodAmount.textContent = periodSelect.value;
+				
+
 			}
 		
 
@@ -174,7 +176,7 @@
 		}; 
 		
 		start.addEventListener('click', appData.start);
-		periodSelect.addEventListener('change', getRangeAmount);
+		periodSelect.addEventListener('change', appData.getRangeAmount);
 
 		expensesPlus.addEventListener('click', appData.addExpensesBlock);
 		incomePlus.addEventListener('click', appData.addIncomeBlock);
