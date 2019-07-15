@@ -37,7 +37,7 @@
 			start: function () {
 				
 				if (salaryAmount.value === ''){
-					alert('Ошибка, поле "Месячный доход" должно быть заполнено');
+					buttonId.setAttribute('start', 'disabled');
 					return;
 				}
 				appData.budget = +salaryAmount.value;	
@@ -48,11 +48,12 @@
 				appData.getAddExpenses();
 				appData.getAddIncome();
 				appData.getBudget();
-				
+				appData.getBlockInput();
 
 				appData.showResult();
+				
 			},
-
+			
 			showResult: function(){
 				budgetMonthValue.value = appData.budgetMonth;
 				budgetDayValue.value = appData.budgetDay;
@@ -175,14 +176,24 @@
 				return appData.budgetMonth * periodSelect.value;
 
 
-			}		
+			 },
+
+			 getBlockInput: function(){
+			 	document.querySelectorAll('.data input[type=text]').forEach(function(item){
+			 		item.disable = true;
+			 	});
+				start.style.display = 'none';
+			 	cancel.style.display = 'block';
+			 }			
+			
 
 
-		}; 
+		}
+	 
 		
 		start.addEventListener('click', appData.start);
 		periodSelect.addEventListener('change', appData.getRangeAmount);
-		//periodAmount.addEventListener('input', appData.calcPeriod);
+		//buttonId.addEventListener('click', appData.getBlockInput);
 
 		expensesPlus.addEventListener('click', appData.addExpensesBlock);
 		incomePlus.addEventListener('click', appData.addIncomeBlock);
