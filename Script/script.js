@@ -53,12 +53,12 @@ AppData.prototype.start = function () {
 	this.getExpenses();
 	this.getIncome();
 	this.getExpensesMonth();
-	this.getAddExpenses();
-	this.getAddIncome();
+	this.getNewAdd();
 	this.getInfoDeposit();
 	this.getBudget();
 	this.getBlockInput();
 	this.showResult();
+	
 	
 };
 
@@ -75,15 +75,27 @@ AppData.prototype.showResult = function(){
 };
 
 
-AppData.prototype.addExpensesBlock = function(){
-	let cloneExpensesItem = expensesItems[0].cloneNode(true);
-		expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
-		expensesItems = document.querySelectorAll('.expenses-items');
-		if(expensesItems.length === 3){
+AppData.prototype.addBlocks = function(firstItem, secondItem, buttonPlus,  cloneItem, itemPlus) {
+firstItem[0].parentNode.insertBefore(cloneItem,itemPlus); //получаем первый с 0) эл-т родит.узла
+firstItem = document.querySelectorAll(secondItem); // в результат присваиваем еще один элемент
 
-		expensesPlus.style.display = 'none';
-	}
+if (firstItem.length === 3){
+	buttonPlus.style.display = 'none'; //как только будет достаточно полей, кнопка добавления исчезает
+
+ }
 };
+
+
+
+// AppData.prototype.addExpensesBlock = function(){
+// 	let cloneExpensesItem = expensesItems[0].cloneNode(true);
+// 		expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
+// 		expensesItems = document.querySelectorAll('.expenses-items');
+// 		if(expensesItems.length === 3){
+
+// 		expensesPlus.style.display = 'none';
+// 	}
+// };
 
 
 AppData.prototype.getExpenses = function(){
@@ -100,15 +112,15 @@ AppData.prototype.getExpenses = function(){
 };
 
 
-AppData.prototype.addIncomeBlock = function(){
-	let cloneIncomeItem = incomeItem[0].cloneNode(true);
-		incomeItem[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
-		incomeItem = document.querySelectorAll('.income-items');
-		if(incomeItem.length === 3){
+// AppData.prototype.addIncomeBlock = function(){
+// 	let cloneIncomeItem = incomeItem[0].cloneNode(true);
+// 		incomeItem[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
+// 		incomeItem = document.querySelectorAll('.income-items');
+// 		if(incomeItem.length === 3){
 
-		incomePlus.style.display = 'none';
-	}
-};
+// 		incomePlus.style.display = 'none';
+// 	}
+// };
 
 
 AppData.prototype.getIncome = function(){
@@ -134,7 +146,7 @@ AppData.prototype.getInfoDeposit = function(){
 };
 
 
-AppData.prototype.getAddExpenses = function(){
+AppData.prototype.getNewAdd = function(){
 	const setContext = this;
 	let addExpenses = additionalExpensesItem.value.split(',');
 	addExpenses.forEach(function(item){
@@ -143,11 +155,8 @@ AppData.prototype.getAddExpenses = function(){
 			setContext.addExpenses.push(item);
 		}
 	});
-};
 
-
-AppData.prototype.getAddIncome = function(){
-	const setContext = this;
+	
 	additionalIncomeItem.forEach(function(item){
 		let itemValue = item.value.trim();
 		if(itemValue !== ''){
@@ -155,6 +164,7 @@ AppData.prototype.getAddIncome = function(){
 		}
 	});
 };
+
 
 
 AppData.prototype.getExpensesMonth = function() { //Cчитаем сумму всех расходов за месяц
@@ -221,22 +231,7 @@ AppData.prototype.getReset = function(){
 
 
 
-
-const appData = new AppData();
-
-
-
-
-
-
-
-
-	
-
-		
-	 
-		
-appData.prototype.addEventListener = function(){
+AppData.prototype.addEventListener = function(){
 	start.addEventListener('click', appData.start.bind(appData));
 		periodSelect.addEventListener('change', appData.getRangeAmount);
 		cancel.addEventListener('click', appData.getReset);
@@ -271,9 +266,10 @@ appData.prototype.addEventListener = function(){
 				}
 			});
 		
-}
+};
 
-
+const appData = new AppData();
+AppData.prototype.addEventListener();
 	
 	
 		
