@@ -77,13 +77,15 @@ AppData.prototype.showResult = function(){
 };
 
 
-AppData.prototype.addBlocks = function (firstItem, buttonPlus, secondItem, cloneItem, itemPlus) {
+AppData.prototype.addBlocks = function (buttonPlus, nodeList) {
+	let cloneItem = nodeList[0].cloneNode(true); //получение первого эл-та для работы с инпутами
+		cloneItem.querySelectorAll('input').forEach((item) => item.value = ''); //запрет копирования содержимого инпута
+		nodeList[0].parentNode.insertBefore(cloneItem, buttonPlus); //добавление нового инпута
+		cloneItem.children[0].addEventListener('input', this); //копирование потомков в блок
+		cloneItem.children[1].addEventListener('input', this);
 
-	firstItem[0].parentNode.insertBefore(cloneItem, itemPlus); //получаем первый с 0) эл-т родит.узла
-	firstItem = document.querySelectorAll(secondItem); // в результат присваиваем еще один элемент
-
-	if (firstItem.length === 3) {
-		buttonPlus.style.display = 'none';  //как только будет достаточно полей, кнопка добавления исчезает
+	if (nodeList.length === 3) {
+		buttonPlus.style.display = 'none';  //удаляем кнопку добавления
 	}
 
 };
@@ -91,14 +93,14 @@ AppData.prototype.addBlocks = function (firstItem, buttonPlus, secondItem, clone
 
 AppData.prototype.getExpenses = function(){
 	const setContext = this; 
-	expensesItems.forEach(function(item){
+		expensesItems.forEach(function(item){
 		let itemExpenses = item.querySelector('.expenses-title').value;
 		let cashExpenses = item.querySelector('.expenses-amount').value;
-		if(itemExpenses !== '' && cashExpenses !== ''){
-			setContext.expenses[itemExpenses] = cashExpenses;
-		}	
+			if(itemExpenses !== '' && cashExpenses !== ''){
+				setContext.expenses[itemExpenses] = cashExpenses;
+			}	
 
-	});
+		});
 
 };
 
@@ -211,17 +213,14 @@ AppData.prototype.addEventListener = function(){
 		cancel.addEventListener('click', this.getReset);
 	
 		incomePlus.addEventListener('click', () => {
-			const cloneIncomeItem = incomeItems[0].cloneNode(true);
-			this.addBlocks(incomeItems, incomePlus, '.income-items', cloneIncomeItem, incomePlus);
-		}); //для доходов
+			this.addBlocks(incomeItems, incomePlus);
+			incomeItems = document.querySelectorAll('.income-items');
+		}); // доходs
 
 		expensesPlus.addEventListener('click', () => {
-			const cloneExpensesItem = expensesItems[0].cloneNode(true);
-			this.addBlocks(expensesItems, expensesPlus, '.expenses-items', cloneExpensesItem, expensesPlus);
-		});// для расходов
-
-
-		// используя параметры из метода, с помощью this обращаемся к addBlocks 
+			this.addBlocks(expensesItems, expensesPlus);
+			expensesItems = document/querySelectorAll('.expenses-items');
+		});// расходs
 
 
 		periodSelect.addEventListener('change', function (){
