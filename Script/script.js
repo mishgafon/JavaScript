@@ -77,7 +77,7 @@ AppData.prototype.showResult = function(){
 };
 
 
-AppData.prototype.addBlocks = function (buttonPlus, nodeList) {
+AppData.prototype.addBlocks = function (nodeList, buttonPlus) {
 	let cloneItem = nodeList[0].cloneNode(true); //получение первого эл-та для работы с инпутами
 		cloneItem.querySelectorAll('input').forEach((item) => item.value = ''); //запрет копирования содержимого инпута
 		nodeList[0].parentNode.insertBefore(cloneItem, buttonPlus); //добавление нового инпута
@@ -219,7 +219,7 @@ AppData.prototype.addEventListener = function(){
 
 		expensesPlus.addEventListener('click', () => {
 			this.addBlocks(expensesItems, expensesPlus);
-			expensesItems = document/querySelectorAll('.expenses-items');
+			expensesItems = document.querySelectorAll('.expenses-items');
 		});// расходs
 
 
@@ -242,7 +242,8 @@ AppData.prototype.addEventListener = function(){
 						depositPercent.style.display = 'none';
 						depositPercent.value = selectIndex;
 					}
-					});
+					})
+
 				} else {
 					depositBank.style.display = 'none';
 					depositAmount.style.display = 'none';
