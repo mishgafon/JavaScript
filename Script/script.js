@@ -1,14 +1,14 @@
 
-window.addEventListener('DOMcontentLoaded', function(){
+window.addEventListener('DOMContentLoaded', function(){
 	'use strict';
 
 	//Timer
-function countTimer(deadLine){
+function countTimer(deadline){
 	let timerHours = document.querySelector('#timer-hours'),
 		timerMinutes = document.querySelector('#timer-minutes'),
 		timerSeconds = document.querySelector('#timer-seconds');
 		
-anf = wedwerw
+
 		function getTimeRemaining(){
 			let	dateStop = new Date(deadline).getTime(),
 				dateNow = new Date().getTime(),
@@ -16,27 +16,35 @@ anf = wedwerw
 				seconds = Math.floor(timeRemaining % 60),
 				minutes = Math.floor((timeRemaining / 60) % 60),
 				hours = Math.floor(timeRemaining / 60 / 60);
+	
 				return {timeRemaining, hours, minutes, seconds};
-
+				
 		};
-
+		
+		
 		function updateClock(){
 			let timer = getTimeRemaining();
-
-			timerHours.textContent = timer.hours;
-			timerMinutes.textContent = timer.minutes;
-			timerSeconds.textContent = timer.seconds;
+			
 
 			if(timer.timeRemaining > 0){
-				setTimeout(updateClock, 1000);
-		
-			}
-		}
 
-updateClock();
+				timerHours.textContent = (`0` + timer.hours).slice(-2);
+				timerMinutes.textContent = (`0` + timer.minutes).slice(-2); 
+				timerSeconds.textContent = (`0` + timer.seconds).slice(-2); 
+			 } else {
+				timerHours.textContent = '00';
+				timerMinutes.textContent = '00';
+				timerSeconds.textContent = '00';
+				
+			 }
+			 setInterval(updateClock, 1000);
+		};
+
+
+	updateClock();
 
 	}
 
-countTimer('1 july 2019');
+countTimer('25 july 2019');
 
 });
