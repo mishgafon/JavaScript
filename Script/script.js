@@ -88,7 +88,7 @@ const togglePopUp = () =>{
             moveAnimation = requestAnimationFrame(popupAnimate);
             if(count < 150) {
                 count += 1;
-                popupContent.style = `transform: translateY(-${count}px)`;
+                popupContent.style = `transform: translateYgit(-${count}px)`;
             } else {
                 cancelAnimationFrame(moveAnimation);
             }
