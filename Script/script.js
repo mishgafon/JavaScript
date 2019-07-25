@@ -54,8 +54,10 @@ const toggleMenu = () => {
 	
 	const 	btnMenu = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
+			body = document.body,
 			closeBtn = document.querySelector('.close-btn'),
 			menuItems = menu.querySelectorAll('ul>li');
+			
 
 const handlerMenu = () => {
 
@@ -64,15 +66,25 @@ const handlerMenu = () => {
 };
 
 
-		btnMenu.addEventListener('click', handlerMenu);
-		closeBtn.addEventListener('click', handlerMenu);
-		menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+		body.addEventListener('click', (event) => {
+			let target = event.target; 
 
+				if (target.classList.contains('close-btn')) {
+					handlerMenu(); 
+			} 
+			
+				target = target.closest('.menu');
+					if (target) {
+						handlerMenu(); 
+				} else if (!target) { 
+						menu.classList.remove('active-menu');
+			}
+		});
 };
 
 toggleMenu();
 
-});
+
 
 //popup
 const togglePopUp = () =>{
@@ -103,7 +115,7 @@ const togglePopUp = () =>{
 				popup.style = `display: block`;
 			}
 		};
-		
+
 			popupBtn.forEach((item) => {
 				item.addEventListener('click', () => {
 					setAnimation();
@@ -116,11 +128,11 @@ const togglePopUp = () =>{
 			});
 	
 	
-		
-	
-	
 	};
 
 	
 
 togglePopUp();
+
+
+});
