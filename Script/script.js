@@ -176,12 +176,12 @@ togglePopUp();
 
 //слайдер
 const newDot = () => {
-	let portfolioDots = document.querySelector('.portfolio-dots');
+	let portfolioDots = document.querySelector('.portfolio-dots'),
 		portfolioItem = document.querySelectorAll('.portfolio-item');
 		portfolioItem.forEach(() => {
 			let li = document.createElement('li'); 
-			li.className = 'dot';
-			portfolioDots.appendChild(li); 	
+				li.className = 'dot';
+				portfolioDots.appendChild(li); 	
 		});
 		
 	};
