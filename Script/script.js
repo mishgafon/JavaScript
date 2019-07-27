@@ -175,6 +175,17 @@ togglePopUp();
 
 
 //слайдер
+const newDot = () => {
+	let portfolioDots = document.querySelector('.portfolio-dots');
+		portfolioItem = document.querySelectorAll('.portfolio-item');
+		portfolioItem.forEach(() => {
+			let li = document.createElement('li'); 
+			li.className = 'dot';
+			portfolioDots.appendChild(li); 	
+		});
+		
+	};
+	newDot();
 
 	const slider = () => {
 		const slide = document.querySelectorAll('.portfolio-item'),
@@ -196,19 +207,10 @@ togglePopUp();
 	};
 
 
-	 const newDot = () => {
-		let portfolioDots = document.querySelector('.portfolio-dots');
-			//portfolioItem = document.querySelectorAll('.portfolio-item');
-			slide.forEach(() => {
-				let li = document.createElement('li'); 
-				li.className = 'dot';
-				portfolioDots.appendChild(li); 	
-			});
-			
+	 
 			
 		
-	 };
-	 newDot();
+	
 	// console.log(appendChild(newLi));
 	// console.log('newLi: ', newLi);
 
