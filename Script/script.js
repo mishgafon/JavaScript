@@ -181,6 +181,8 @@ togglePopUp();
 			btn = document.querySelectorAll('.portfolio-btn'),
 			dot = document.querySelectorAll('.dot'),
 			slider = document.querySelector('.portfolio-content');
+			
+			
 
 	let currentSlide = 0,
 		interval;
@@ -192,6 +194,25 @@ togglePopUp();
 	const nextSlide = (elem, index, strClass) => {
 		elem[index].classList.add(strClass);
 	};
+
+
+	 const newDot = () => {
+		let portfolioDots = document.querySelector('.portfolio-dots');
+			//portfolioItem = document.querySelectorAll('.portfolio-item');
+			slide.forEach(() => {
+				let li = document.createElement('li'); 
+				li.className = 'dot';
+				portfolioDots.appendChild(li); 	
+			});
+			
+			
+		
+	 };
+	 newDot();
+	// console.log(appendChild(newLi));
+	// console.log('newLi: ', newLi);
+
+
 
 	const autoPlaySlide = () => {
 		prevSlide(slide, currentSlide, 'portfolio-item-active');
@@ -244,7 +265,7 @@ togglePopUp();
 			currentSlide = 0;
 		}
 
-		if(currentSlide, 0){
+		if(currentSlide < 0){
 			currentSlide = slide.length -1;
 		}
 
@@ -268,6 +289,10 @@ togglePopUp();
 		}
 	});
 
+
+
+
+	
 
 	startSlide(1500);
 
