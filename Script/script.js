@@ -313,18 +313,10 @@ const ourCommand = () => {
 			elem.addEventListener('mouseleave', (event) => {
 				event.target.src = ourPhotos;
 			}); 
-	/* место для mouseleave*/
-	
 		
 		 });
 	};
 	ourCommand();
-
-
-		// console.log(dataImg.dataset);
-		// console.log(commandPhoto.dataset);	
-		// console.log(img.dataset);
-
 
 
 
