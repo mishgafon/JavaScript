@@ -86,9 +86,9 @@ const togglePopUp = () =>{
 	
 		const popupAnimate = () => {
             moveAnimation = requestAnimationFrame(popupAnimate);
-            if(count < 150) {
+            if(count < 50) {
                 count += 1;
-                popupContent.style = `transform: translateYgit(-${count}px)`;
+                popupContent.style = `transform: translateX(-${count}px)`;
             } else {
                 cancelAnimationFrame(moveAnimation);
             }
@@ -317,6 +317,7 @@ const ourCommand = () => {
 		 });
 	};
 	ourCommand();
+
 
 
 
