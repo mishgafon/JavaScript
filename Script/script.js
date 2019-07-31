@@ -547,8 +547,6 @@ const ourCommand = () => {
 
 
 		};
-
-		
 		sendForm();
 
 
@@ -564,14 +562,15 @@ const ourCommand = () => {
 	
 			
 			const checkPhone = () => {
-			const formPhone = querySelectorAll('.form-phone');
+			const formPhone = document.querySelectorAll('.form-phone');
 			formPhone.forEach((elem) => {
 			elem.addEventListener('input', (item) => {
 				item.target.value = item.target.value.replace(/[^\+\d]|(.)\+/g, '');
 			});
 		});
-			};
+		};
 			checkPhone();
 
 
+		
 });
