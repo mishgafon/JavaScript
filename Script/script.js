@@ -424,6 +424,7 @@ const ourCommand = () => {
 					form2 = document.getElementById('form2'),
 					form3 = document.getElementById('form3');
 					
+					
 
 			
 			const statusMessage = document.createElement('div');
@@ -435,23 +436,23 @@ const ourCommand = () => {
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form);
 				let body = {};
-			
-				// for(let val of formData.entries()){
-				// 	body[val[0]] = val[1]
-				// }
-				
+
 				formData.forEach((val, key) => {
 					body[key] = val;
 				});
-				postData(body, 
-					() => {
+
+				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
 					form.querySelectorAll('input').forEach(item => item.value = '');
-				}, 
-				(error) => {
+				}; 
+
+				const rejectPromise = () => {
 					statusMessage.textContent = errorMessage;
-					console.error(error);
-				});
+					form.querySelectorAll('input').forEach(item => item.value = '');
+				}; 
+
+				postData(body).then(resolvePromise).catch(rejectPromise); 
+				
 
 			});
 
@@ -462,23 +463,22 @@ const ourCommand = () => {
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form2);
 				let body = {};
-			
-				// for(let val of formData.entries()){
-				// 	body[val[0]] = val[1]
-				// }
-				
+
 				formData.forEach((val, key) => {
 					body[key] = val;
 				});
-				postData(body, 
-					() => {
+
+				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
-					form2.querySelectorAll('input').forEach(item => item.value = '');
-				}, 
-				(error) => {
+					form.querySelectorAll('input').forEach(item => item.value = '');
+				}; 
+
+				const rejectPromise = () => {
 					statusMessage.textContent = errorMessage;
-					console.error(error);
-				});
+					form.querySelectorAll('input').forEach(item => item.value = '');
+				}; 
+
+				postData(body).then(resolvePromise).catch(rejectPromise); 
 
 			});
 
@@ -490,73 +490,88 @@ const ourCommand = () => {
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form3);
 				let body = {};
-			
-				// for(let val of formData.entries()){
-				// 	body[val[0]] = val[1]
-				// }
-				
+
 				formData.forEach((val, key) => {
 					body[key] = val;
 				});
-				postData(body, 
-					() => {
+
+				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
-					form3.querySelectorAll('input').forEach(item => item.value = '');
-				}, 
-				(error) => {
+					form.querySelectorAll('input').forEach(item => item.value = '');
+				}; 
+
+				const rejectPromise = () => {
 					statusMessage.textContent = errorMessage;
-					console.error(error);
-				});
+					form.querySelectorAll('input').forEach(item => item.value = '');
+				}; 
+
+				postData(body).then(resolvePromise).catch(rejectPromise); 
 
 			});
 
 
 
-			const postData = (body, outputData, errorData) => {
-				const request = new XMLHttpRequest();
-				request.addEventListener('readystatechange', () =>{
+			const postData = (body) => {
+				return new Promise((resolve, reject) => {
+
+					const request = new XMLHttpRequest();
+					
+					request.addEventListener('readystatechange', () =>{
+						
+						if (request.readyState !== 4) {
+							return
+						}						
+						if (request.status == 200) {
+							resolve();
+							
+						}else{
+							reject(request.status);
+							
+						}
+						});
+	
+	
+					
+					request.open('POST', './server.php');
+					request.setRequestHeader('Content-Type', 'application/json');
 					
 					
-					if (request.readyState !== 4) {
-						return
-					}						
-					if (request.status == 200) {
-						outputData();
-						
-					}else{
-						errorData(request.status);
-						
-					}
-					});
+	
+					//request.send(formData);
+					request.send(JSON.stringify(body));
 
-
-				
-				request.open('POST', './server.php');
-				request.setRequestHeader('Content-Type', 'application/json');
-				
-				
-
-				//request.send(formData);
-				request.send(JSON.stringify(body));
+				});
+			
 			};
 
+
+
+		};
+
+		
+		sendForm();
+
+
+		const checkText = () => {
 			document.body.addEventListener('input', (event) => {
 				if (event.target.matches ('.form-name', '#form2-name', '.mess') ) {
 					event.target.value = event.target.value.replace(/[^а-я]/gi, '');
 		  };
-
-		  formPhone.forEach((elem) => {
+		});
+			};
+			checkText();
+	
+	
+			
+			const checkPhone = () => {
+			const formPhone = querySelectorAll('.form-phone');
+			formPhone.forEach((elem) => {
 			elem.addEventListener('input', (item) => {
 				item.target.value = item.target.value.replace(/[^\+\d]|(.)\+/g, '');
 			});
 		});
-
-			});
-
-		};
-		sendForm();
-
-
+			};
+			checkPhone();
 
 
 });
