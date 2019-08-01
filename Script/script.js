@@ -411,11 +411,11 @@ const ourCommand = () => {
 				form.appendChild(statusMessage);
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form);
-				// let body = {};
+				let body = {};
 
-				// formData.forEach((val, key) => {
-				// 	body[key] = val;
-				// });
+				formData.forEach((val, key) => {
+					body[key] = val;
+				});
 			
 				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
@@ -446,11 +446,11 @@ const ourCommand = () => {
 				form2.appendChild(statusMessage);
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form2);
-				// let body = {};
+				let body = {};
 
-				// formData.forEach((val, key) => {
-				// 	body[key] = val;
-				// });
+				formData.forEach((val, key) => {
+					body[key] = val;
+				});
 
 				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
@@ -481,11 +481,11 @@ const ourCommand = () => {
 				form3.appendChild(statusMessage);
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form3);
-				// let body = {};
+				let body = {};
 
-				// formData.forEach((val, key) => {
-				// 	body[key] = val;
-				// });
+				formData.forEach((val, key) => {
+					body[key] = val;
+				});
 
 				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
@@ -518,7 +518,7 @@ const ourCommand = () => {
 					headers: {
 						'Content-Type': 'application/json'
 					},
-					body: formData
+					body: JSON.stringify(body)
 				});
 
 
