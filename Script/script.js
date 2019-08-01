@@ -344,10 +344,6 @@ const ourCommand = () => {
 			   calcCount.addEventListener('input', () => {
 				   calcCount.value = calcCount.value.replace(/\D/g, '');
 			   });
-			
-
-				 
-
 
 			const countSum = () => {
 				let total = 0,
@@ -384,22 +380,6 @@ const ourCommand = () => {
 			calcBlock.addEventListener('change', (event) => {
 				const target = event.target;
 				
-				//варианты:
-				// if(target.matches('.calc-type') || 
-				// 	target.matches('.calc-square') ||
-				// 	target.matches('.calc-day') ||
-				// 	target.matches('.calc-count')){
-				
-				//или
-
-
-				// 	}
-				// if(target === calcType || target === calcSquary ||
-				// 	target === calcDay || target === calcCount){
-
-				// 	}
-				
-				//или
 
 				if (target.matches('select') || target.matches('input')){
 					countSum();
@@ -417,14 +397,10 @@ const ourCommand = () => {
 		const errorMessage = 'Что-то пошло не так...',
 			loadMessage = 'Загрузка...',
 			successMesage = 'Спасибо! Мы скоро с вами свяжемся!';
-			
-
 
 			const form = document.getElementById('form1'),
 					form2 = document.getElementById('form2'),
 					form3 = document.getElementById('form3');
-					
-					
 
 			
 			const statusMessage = document.createElement('div');
@@ -435,12 +411,12 @@ const ourCommand = () => {
 				form.appendChild(statusMessage);
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form);
-				let body = {};
+				// let body = {};
 
-				formData.forEach((val, key) => {
-					body[key] = val;
-				});
-
+				// formData.forEach((val, key) => {
+				// 	body[key] = val;
+				// });
+			
 				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
 					form.querySelectorAll('input').forEach(item => item.value = '');
@@ -451,8 +427,16 @@ const ourCommand = () => {
 					form.querySelectorAll('input').forEach(item => item.value = '');
 				}; 
 
-				postData(body).then(resolvePromise).catch(rejectPromise); 
-				
+				postData(body)
+				.then(() => {
+					if (response.status !== 200){
+						throw new Error('status network not 200');
+					}
+					resolvePromise();
+				})
+				.catch((error) => {
+					rejectPromise();
+				});
 
 			});
 
@@ -462,24 +446,32 @@ const ourCommand = () => {
 				form2.appendChild(statusMessage);
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form2);
-				let body = {};
+				// let body = {};
 
-				formData.forEach((val, key) => {
-					body[key] = val;
-				});
+				// formData.forEach((val, key) => {
+				// 	body[key] = val;
+				// });
 
 				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
-					form.querySelectorAll('input').forEach(item => item.value = '');
+					form2.querySelectorAll('input').forEach(item => item.value = '');
 				}; 
 
 				const rejectPromise = () => {
 					statusMessage.textContent = errorMessage;
-					form.querySelectorAll('input').forEach(item => item.value = '');
+					form2.querySelectorAll('input').forEach(item => item.value = '');
 				}; 
 
-				postData(body).then(resolvePromise).catch(rejectPromise); 
-
+				postData(body)
+				.then(() => {
+					if (response.status !== 200){
+						throw new Error('status network not 200');
+					}
+					resolvePromise();
+				})
+				.catch((error) => {
+					rejectPromise();
+				});
 			});
 
 
@@ -489,58 +481,47 @@ const ourCommand = () => {
 				form3.appendChild(statusMessage);
 				statusMessage.textContent = loadMessage;
 				const formData = new FormData(form3);
-				let body = {};
+				// let body = {};
 
-				formData.forEach((val, key) => {
-					body[key] = val;
-				});
+				// formData.forEach((val, key) => {
+				// 	body[key] = val;
+				// });
 
 				const resolvePromise = () => {
 					statusMessage.textContent = successMesage;
-					form.querySelectorAll('input').forEach(item => item.value = '');
+					form3.querySelectorAll('input').forEach(item => item.value = '');
 				}; 
 
 				const rejectPromise = () => {
 					statusMessage.textContent = errorMessage;
-					form.querySelectorAll('input').forEach(item => item.value = '');
+					form3.querySelectorAll('input').forEach(item => item.value = '');
 				}; 
 
-				postData(body).then(resolvePromise).catch(rejectPromise); 
+				postData(body)
+				.then(() => {
+					if (response.status !== 200){
+						throw new Error('status network not 200');
+					}
+					resolvePromise();
+				})
+				.catch((error) => {
+					rejectPromise();
+				}); 
 
 			});
 
 
 
 			const postData = (body) => {
-				return new Promise((resolve, reject) => {
-
-					const request = new XMLHttpRequest();
-					
-					request.addEventListener('readystatechange', () =>{
-						
-						if (request.readyState !== 4) {
-							return
-						}						
-						if (request.status == 200) {
-							resolve();
-							
-						}else{
-							reject(request.status);
-							
-						}
-						});
-	
-	
-					
-					request.open('POST', './server.php');
-					request.setRequestHeader('Content-Type', 'application/json');
-					
-					
-	
-					//request.send(formData);
-					request.send(JSON.stringify(body));
-
+				return fetch('./server.php', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: formData
 				});
+
+
 			
 			};
 
