@@ -427,16 +427,13 @@ const ourCommand = () => {
 					form.querySelectorAll('input').forEach(item => item.value = '');
 				}; 
 
-				postData(body)
-				.then(() => {
+				postData(body).then((response) => {
 					if (response.status !== 200){
 						throw new Error('status network not 200');
 					}
 					resolvePromise();
 				})
-				.catch((error) => {
-					rejectPromise();
-				});
+				.catch(rejectPromise);
 
 			});
 
