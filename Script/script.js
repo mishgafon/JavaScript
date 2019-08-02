@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 //Timer
 	const countTimer = (deadline) => {
-		const 	timferHours = document.querySelector('#timer-hours'),
+		const 	timerHours = document.querySelector('#timer-hours'),
 			timerMinutes = document.querySelector('#timer-minutes'),
 			timerSeconds = document.querySelector('#timer-seconds');
 		
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', function(){
 		};
 		updateClock();
 	}
-	countTimer('29 december 2019');
+	countTimer('30 august 2019');
 
 
 // Menu
