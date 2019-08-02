@@ -153,24 +153,24 @@ window.addEventListener('DOMContentLoaded', function(){
 
 
 //слайдер
-	const newDot = () => {
-		let portfolioDots = document.querySelector('.portfolio-dots'),
-			portfolioItem = document.querySelectorAll('.portfolio-item');
-			
-
-		portfolioItem.forEach(() => {
-			let li = document.createElement('li'); 
-				li.className = 'dot';
-				portfolioDots.appendChild(li); 	
-			});
-	};
-	newDot();
-
-
 	const slider = () => {
 		const slide = document.querySelectorAll('.portfolio-item'),
-			dot = document.querySelectorAll('.dot'),
+			portfolioDots = document.querySelector('.portfolio-dots'),
 			slider = document.querySelector('.portfolio-content');
+		let newDot = document.createElement('li');
+			newDot.classList.add('dot');
+
+		for (let i = 0; i < slide.length; i++){
+			newDot = document.createElement('li');
+			newDot.classList.add('dot');
+
+			if (i === 0) {
+				newDot.classList.add('dot-active')
+			}
+			portfolioDots.appendChild(newDot);
+		}
+
+		const	dot = document.querySelectorAll('.dot');
 		let currentSlide = 0,
 			interval;
 
@@ -198,7 +198,7 @@ window.addEventListener('DOMContentLoaded', function(){
 		};
 
 
-		const startSlide = (time = 1500) => {
+		const startSlide = (time = 3000) => {
 			interval = setInterval(autoPlaySlide, time);
 		};
 
@@ -233,8 +233,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 				if (currentSlide >= slide.length){
 					currentSlide = 0;
-				}
-					if(currentSlide < 0){
+				} else if(currentSlide < 0){
 						currentSlide = slide.length -1;
 					}
 
@@ -254,14 +253,14 @@ window.addEventListener('DOMContentLoaded', function(){
 				startSlide();
 			}
 		});
-		startSlide(1500);
+		startSlide(3000);
 	};
 	slider();
 
 
 //наша команда
 	const ourCommand = () => {
-		const commandPhoto = document.querySelectorAll('.command .row img');
+		const commandPhoto = document.querySelectorAll('.command__photo');
 			
 		
 		commandPhoto.forEach(elem => {
@@ -323,7 +322,7 @@ window.addEventListener('DOMContentLoaded', function(){
 						dayValue *= 1.5;
 					}							 
 						if (typeValue && squareValue){
-						total = price * typeValue * squareValue * countValue * dayValue;
+						total = Math.floor(price * typeValue * squareValue * countValue * dayValue);
 						} 
 			totalValue.textContent = total;
 		};
@@ -346,120 +345,45 @@ window.addEventListener('DOMContentLoaded', function(){
 			loadMessage = 'Загрузка...',
 			successMesage = 'Спасибо! Мы скоро с вами свяжемся!';
 
-		const form = document.getElementById('form1'),
-				form2 = document.getElementById('form2'),
-				form3 = document.getElementById('form3');
+		const form = document.querySelectorAll('form');
 			
 		const statusMessage = document.createElement('div');
-			statusMessage.style.cssText = 'font-size: 2rem;';
+			statusMessage.style.cssText = 'font-size: 2rem; color: white;';
 			
+		form.forEach((item) => {
 
-		form.addEventListener('submit', (event) => {
+			
+		item.addEventListener('submit', (event) => {
 			event.preventDefault();
-			form.appendChild(statusMessage);
+			item.appendChild(statusMessage);
 			statusMessage.textContent = loadMessage;
-			const formData = new FormData(form);
+			
+			const formData = new FormData(item);
 			let body = {};
 
 
 			formData.forEach((val, key) => {
 				body[key] = val;
-			});
-			
-
-			const resolvePromise = () => {
-				statusMessage.textContent = successMesage;
-				form.querySelectorAll('input').forEach(item => item.value = '');
-				}; 
-
-
-			const rejectPromise = () => {
-				statusMessage.textContent = errorMessage;
-				form.querySelectorAll('input').forEach(item => item.value = '');
-			}; 
+			});			
+			statusMessage.textContent = loadMessage;
 
 
 			postData(body).then((response) => {
 				if (response.status !== 200){
 					throw new Error('status network not 200');
 				}
-				resolvePromise();
-			})
-			.catch(rejectPromise);
-		});
-
-		form2.addEventListener('submit', (event) => {
-			event.preventDefault();
-			form2.appendChild(statusMessage);
-			statusMessage.textContent = loadMessage;
-			const formData = new FormData(form2);
-			let body = {};
-
-
-			formData.forEach((val, key) => {
-				body[key] = val;
-			});
-
-
-			const resolvePromise = () => {
 				statusMessage.textContent = successMesage;
-				form2.querySelectorAll('input').forEach(item => item.value = '');
-			}; 
-
-
-			const rejectPromise = () => {
-				statusMessage.textContent = errorMessage;
-				form2.querySelectorAll('input').forEach(item => item.value = '');
-			}; 
-
-
-			postData(body)
-				.then(() => {
-					if (response.status !== 200){
-						throw new Error('status network not 200');
-					}
-					resolvePromise();
+				item.reset();
 			})
-				.catch((error) => {
-				rejectPromise();
+
+
+			.catch((error) => {
+				statusMessage.textContent = errorMessage;
+				console.log(error);
 			});
 		});
-
-			form3.addEventListener('submit', (event) => {
-				event.preventDefault();
-				form3.appendChild(statusMessage);
-				statusMessage.textContent = loadMessage;
-				const formData = new FormData(form3);
-				let body = {};
-
-				formData.forEach((val, key) => {
-					body[key] = val;
-				});
-
-				const resolvePromise = () => {
-					statusMessage.textContent = successMesage;
-					form3.querySelectorAll('input').forEach(item => item.value = '');
-				}; 
-
-				const rejectPromise = () => {
-					statusMessage.textContent = errorMessage;
-					form3.querySelectorAll('input').forEach(item => item.value = '');
-				}; 
-
-				postData(body)
-				.then(() => {
-					if (response.status !== 200){
-						throw new Error('status network not 200');
-					}
-					resolvePromise();
-				})
-				.catch((error) => {
-					rejectPromise();
-				}); 
-
-			});
-
-
+	});
+		
 		const postData = (body) => {
 			return fetch('./server.php', {
 				method: 'POST',
